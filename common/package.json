@@ -1,7 +1,7 @@
 {
   "name": "@dlc-k8s-test/common",
   "version": "0.0.3",
-  "description": "",
+  "description": "common utils for my microservices course",
   "main": "./build/index.js",
   "types": "./build/index.d.ts",
   "files": [
@@ -12,7 +12,11 @@
     "clean": "del ./build/*",
     "pub": "git add . && git commit -m \"Updates \" && npm version patch && npm run build && npm publish"
   },
-  "keywords": [],
+  "keywords": [
+    "learning",
+    "k8s",
+    "danilucaci"
+  ],
   "author": "danilucaci@gmail.com",
   "license": "MIT",
   "devDependencies": {
