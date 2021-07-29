@@ -1,4 +1,5 @@
 import supertest from "supertest";
+import mongoose from "mongoose";
 
 import { app } from "../../app";
 import { Ticket } from "../../models/ticket";
@@ -6,11 +7,12 @@ import { Ticket } from "../../models/ticket";
 const request = supertest(app);
 
 it("returns a 404 if the ticket is not found", async () => {
-  const res = await request.get("/api/tickets/j8da9sj89da89sa").send();
+  const ticketId = new mongoose.Types.ObjectId().toHexString();
+  const res = await request.get(`/api/tickets/${ticketId}`).send();
   expect(res.statusCode).toBe(404);
 });
 
-it.skip("returns the ticket if the ticket is found", async () => {
+it("returns the ticket if the ticket is found", async () => {
   const expectedTitle = "ticket 01";
   const expectedPrice = 200;
 
@@ -22,15 +24,18 @@ it.skip("returns the ticket if the ticket is found", async () => {
       price: expectedPrice,
     });
 
-  const getRes = await request.get(`/api/tickets/${postRes.body.id}`).send();
+  const getRes = await request
+    .get(`/api/tickets/${postRes.body.data.id}`)
+    .send();
 
   expect(postRes.statusCode).toBe(201);
   expect(getRes.statusCode).toBe(200);
-  expect(getRes.body).toEqual({
+  expect(getRes.body).toMatchObject({
     data: {
       title: expectedTitle,
       price: expectedPrice,
       id: expect.any(String),
+      userId: expect.any(String),
     },
   });
 });

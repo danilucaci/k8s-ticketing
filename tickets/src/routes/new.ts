@@ -27,6 +27,7 @@ router.post(
 
     res.status(201).send({
       data: {
+        id: ticket.id,
         title: ticket.title,
         price: ticket.price,
         userId: ticket.id,

@@ -8,28 +8,22 @@ const router = express.Router();
 router.get("/api/tickets/:ticketId", async (req: Request, res: Response) => {
   const { ticketId } = req.params;
 
-  try {
-    var found = await Ticket.findOne({
-      _id: ticketId,
-    })
-      .lean()
-      .exec();
+  const found = await Ticket.findOne({
+    _id: ticketId,
+  });
 
-    if (!found) {
-      throw new NotFoundError();
-    }
-
-    res.status(201).send({
-      data: {
-        title: found.title,
-        price: found.price,
-        userId: found.id,
-      },
-    });
-    console.log(found);
-  } catch (error) {
-    console.log(error);
+  if (!found) {
+    throw new NotFoundError();
   }
+
+  res.status(200).send({
+    data: {
+      id: found.id,
+      title: found.title,
+      price: found.price,
+      userId: found.userId,
+    },
+  });
 });
 
 export { router as showTicketsRouter };
