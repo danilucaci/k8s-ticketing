@@ -17,7 +17,7 @@
     "k8s",
     "danilucaci"
   ],
-  "author": "danilucaci@gmail.com",
+  "author": "Dani Lucaci <hello@danilucaci.com> (https://www.danilucaci.com/)",
   "license": "MIT",
   "devDependencies": {
     "del-cli": "^4.0.1",

@@ -13,6 +13,8 @@ export const errorHandler: ErrorRequestHandler = (
     });
   }
 
+  console.log(error);
+
   res.status(500).send({
     errors: [
       {
