@@ -1,6 +1,6 @@
 {
   "name": "@dlc-k8s-test/common",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "common utils for my microservices course",
   "main": "./build/index.js",
   "types": "./build/index.d.ts",
