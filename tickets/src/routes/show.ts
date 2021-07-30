@@ -1,29 +1,17 @@
-import express, { Response, Request } from "express";
+import express, { Request, Response } from "express";
 import { NotFoundError } from "@dlc-k8s-test/common";
-
 import { Ticket } from "../models/ticket";
 
 const router = express.Router();
 
-router.get("/api/tickets/:ticketId", async (req: Request, res: Response) => {
-  const { ticketId } = req.params;
+router.get("/api/tickets/:id", async (req: Request, res: Response) => {
+  const ticket = await Ticket.findById(req.params.id);
 
-  const found = await Ticket.findOne({
-    _id: ticketId,
-  });
-
-  if (!found) {
+  if (!ticket) {
     throw new NotFoundError();
   }
 
-  res.status(200).send({
-    data: {
-      id: found.id,
-      title: found.title,
-      price: found.price,
-      userId: found.userId,
-    },
-  });
+  res.send(ticket);
 });
 
-export { router as showTicketsRouter };
+export { router as showTicketRouter };

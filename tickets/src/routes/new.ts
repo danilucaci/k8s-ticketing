@@ -1,7 +1,6 @@
-import express, { Response, Request } from "express";
+import express, { Request, Response } from "express";
 import { body } from "express-validator";
 import { requireAuth, validateRequest } from "@dlc-k8s-test/common";
-
 import { Ticket } from "../models/ticket";
 
 const router = express.Router();
@@ -19,21 +18,15 @@ router.post(
   async (req: Request, res: Response) => {
     const { title, price } = req.body;
 
-    const ticket = await Ticket.create({
+    const ticket = Ticket.build({
       title,
       price,
       userId: req.currentUser!.id,
     });
+    await ticket.save();
 
-    res.status(201).send({
-      data: {
-        id: ticket.id,
-        title: ticket.title,
-        price: ticket.price,
-        userId: ticket.id,
-      },
-    });
+    res.status(201).send(ticket);
   }
 );
 
-export { router as createTicketsRouter };
+export { router as createTicketRouter };

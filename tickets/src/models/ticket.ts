@@ -13,7 +13,7 @@ interface TicketDoc extends mongoose.Document {
 }
 
 interface TicketModel extends mongoose.Model<TicketDoc> {
-  build: (attrs: TicketAttrs) => TicketDoc;
+  build(attrs: TicketAttrs): TicketDoc;
 }
 
 const ticketSchema = new mongoose.Schema(
@@ -33,10 +33,9 @@ const ticketSchema = new mongoose.Schema(
   },
   {
     toJSON: {
-      transform: function transform(doc, ret) {
+      transform(doc, ret) {
         ret.id = ret._id;
         delete ret._id;
-        delete ret.__v;
       },
     },
   }
