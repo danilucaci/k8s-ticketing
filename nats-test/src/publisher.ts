@@ -13,6 +13,7 @@ stan.on("connect", async () => {
     id: "123",
     title: "concert",
     price: 20,
+    userId: "dani123",
   });
 
   console.log(result);

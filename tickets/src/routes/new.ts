@@ -2,6 +2,8 @@ import express, { Request, Response } from "express";
 import { body } from "express-validator";
 import { requireAuth, validateRequest } from "@dlc-k8s-test/common";
 import { Ticket } from "../models/ticket";
+import { TicketCreatedPublisher } from "../events/publishers/ticket-created";
+import { natsWrapper } from "../nats-wrapper";
 
 const router = express.Router();
 
@@ -24,6 +26,10 @@ router.post(
       userId: req.currentUser!.id,
     });
     await ticket.save();
+
+    const client = natsWrapper.client;
+
+    new TicketCreatedPublisher(client).publish({ id: ticket.id, ...ticket });
 
     res.status(201).send(ticket);
   }
