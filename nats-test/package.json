@@ -11,7 +11,7 @@
   "author": "Dani Lucaci <hello@danilucaci.com> (https://www.danilucaci.com/)",
   "license": "MIT",
   "dependencies": {
-    "@dlc-k8s-test/common": "^0.0.7",
+    "@dlc-k8s-test/common": "^0.0.8",
     "@types/node": "^16.4.9",
     "node-nats-streaming": "^0.3.2",
     "ts-node-dev": "^1.1.8",
